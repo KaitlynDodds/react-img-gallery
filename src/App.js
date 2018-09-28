@@ -20,10 +20,10 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		this.submitSearch("cats");
+		this.onSubmitSearch("cats");
 	}
 
-	submitSearch = (val) => {
+	onSubmitSearch = (val) => {
 		axios.get('https://api.flickr.com/services/rest', {
 			params: {
 				api_key: apiKey,
@@ -46,7 +46,9 @@ class App extends Component {
 	render() {
 		return (
 			<div className="container">
-				<SearchForm />
+				<SearchForm 
+					onSubmitSearch={this.onSubmitSearch}
+				/>
 				<MainNav />
 				<PhotoContainer 
 					photos={this.state.photos}
