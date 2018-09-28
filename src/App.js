@@ -20,6 +20,10 @@ class App extends Component {
 	}
 
 	componentDidMount() {
+		this.submitSearch("cats");
+	}
+
+	submitSearch = (val) => {
 		axios.get('https://api.flickr.com/services/rest', {
 			params: {
 				api_key: apiKey,
@@ -28,7 +32,7 @@ class App extends Component {
 				per_page: 24,
 				format: "json",
 				nojsoncallback: 1,
-				tags: "sunsets"
+				tags: val
 			}
 		})
 		.then(response => {
@@ -44,7 +48,9 @@ class App extends Component {
 			<div className="container">
 				<SearchForm />
 				<MainNav />
-				<PhotoContainer />
+				<PhotoContainer 
+					photos={this.state.photos}
+				/>
 			</div>
 		);
 	}
