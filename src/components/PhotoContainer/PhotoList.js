@@ -6,6 +6,7 @@ import PhotoItem from './PhotoItem';
 const PhotoList = props => { 
 
     const photoItemComponents = props.photos.map(photo => {
+        console.log(photo);
          return (
             <PhotoItem 
                 key={photo.id} 

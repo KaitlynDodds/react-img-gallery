@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import apiKey from './config';
 import axios from 'axios';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 // components
 import SearchForm from './components/SearchForm';
@@ -14,17 +15,50 @@ class App extends Component {
 		super(props);
 
 		this.state = {
-			photos: []
+			photos: [],
+			cats: [],
+			starwars: [],
+			crayons: []
 		};
 
 	}
 
 	componentDidMount() {
-		this.onSubmitSearch("cats");
+		this.searchFlickr('cats')
+			.then(response => response.data.photos.photo)
+			.then(photos => {
+				this.setState({
+					cats: photos
+				});
+			});
+
+		this.searchFlickr('star wars')
+			.then(response => response.data.photos.photo)
+			.then(photos => {
+				this.setState({
+					starwars: photos
+				});
+			});
+
+		this.searchFlickr('crayons')
+			.then(response => response.data.photos.photo)
+			.then(photos => {
+				this.setState({
+					crayons: photos
+				});
+			});
 	}
 
 	onSubmitSearch = (val) => {
-		axios.get('https://api.flickr.com/services/rest', {
+		this.searchFlickr(val)
+			.then(response => response.data.photos.photo)
+			.then(photos => {
+				this.setState({ photos });
+			});
+	}
+
+	searchFlickr = (search) => {
+		return axios.get('https://api.flickr.com/services/rest', {
 			params: {
 				api_key: apiKey,
 				method: "flickr.photos.search",
@@ -32,11 +66,8 @@ class App extends Component {
 				per_page: 24,
 				format: "json",
 				nojsoncallback: 1,
-				tags: val
+				tags: search
 			}
-		})
-		.then(response => {
-			this.setState({ photos: response.data.photos.photo });
 		})
 		.catch(error => {
 			console.log(error);
@@ -45,15 +76,33 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="container">
-				<SearchForm 
-					onSubmitSearch={this.onSubmitSearch}
-				/>
-				<MainNav />
-				<PhotoContainer 
-					photos={this.state.photos}
-				/>
-			</div>
+			<BrowserRouter>
+				<div className="container">
+					<SearchForm 
+						onSubmitSearch={this.onSubmitSearch}
+					/>
+					<MainNav />
+					<Switch>
+						<Route 
+							exact
+							path="/"
+							render={() => <PhotoContainer  photos={this.state.photos} /> }
+						/>
+						<Route 
+							path={`/cats`}
+							render={ () => <PhotoContainer photos={this.state.cats} />  }
+						/>
+						<Route 
+							path={`/starwars`}
+							render={ () => <PhotoContainer photos={this.state.starwars} />  }
+						/>
+						<Route 
+							path={`/crayons`}
+							render={ () => <PhotoContainer photos={this.state.crayons} />  }
+						/>
+					</Switch>
+				</div>
+			</BrowserRouter>
 		);
 	}
 

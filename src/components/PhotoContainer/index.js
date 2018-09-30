@@ -4,6 +4,7 @@ import React from 'react';
 import PhotoList from './PhotoList';
 
 const PhotoContainer = props => {
+    console.log(props.photos);
     return (
         <div className="photo-container">
             <h2>Results</h2>
