@@ -86,11 +86,11 @@ class App extends Component {
 						<Route 
 							exact
 							path="/"
-							render={() => <PhotoContainer  photos={this.state.photos} /> }
+							component={ PhotoContainer }
 						/>
 						<Route 
-							path={`/cats`}
-							render={ () => <PhotoContainer photos={this.state.cats} />  }
+							path={`/search/:value`}
+							render={ (props)=>  <PhotoContainer {...props} photos = { this.state.photos } search = { this.onSubmitSearch } />}
 						/>
 						<Route 
 							path={`/starwars`}

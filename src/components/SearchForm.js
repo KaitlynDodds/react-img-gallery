@@ -18,6 +18,7 @@ class SearchForm extends Component {
     
         this.props.onSubmitSearch(this.state.inputText);
         e.target.reset();
+        // this.props.history.push("/");
     }
 
     render() {

@@ -1,16 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 // components 
-import PhotoList from './PhotoList';
+import PhotoItem from './PhotoItem';
 
-const PhotoContainer = props => {
-    console.log(props.photos);
-    return (
-        <div className="photo-container">
-            <h2>Results</h2>
-            <PhotoList photos={props.photos} />
-        </div>
-    );
+class PhotoContainer extends Component { 
+
+    componentDidMount = () => {
+        this.props.search(this.props.match.params.value);
+    }
+    
+    render() {
+        const photoItemComponents = this.props.photos.map(photo => {
+                return (
+                <PhotoItem  
+                    key={photo.id} 
+                    url={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg`} 
+                    alt={photo.title}
+                />
+            );
+        });
+
+        return (
+            <div className="photo-container">
+                <ul>
+                    { photoItemComponents  }
+                </ul>
+            </div>
+        );
+    }
 }
 
 export default PhotoContainer;

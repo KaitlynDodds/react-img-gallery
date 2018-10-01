@@ -1,15 +1,15 @@
 import React from 'react';
 
 // components
-import NavLink from './NavLink';
+import Link from './Link';
 
 const MainNav = props => {
     return (
         <nav className="main-nav">
             <ul>
-                <NavLink topic="cats" />
-                <NavLink topic="dogs" />
-                <NavLink topic="computers" />
+                <Link topic="cats" />
+                <Link topic="crayons" />
+                <Link topic="starwars" />
             </ul>
         </nav>
     );
