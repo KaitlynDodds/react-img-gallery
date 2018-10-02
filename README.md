@@ -121,5 +121,5 @@ It's okay to request and load the photos for the three default topics when the a
 
 **Include a 404-like error route that displays a friendly 404 error page when a URL does not match an existing route.**
 
-**Completed:** N/A    
+**Completed:** 10/02/2018    
 **Grade:** N/A
