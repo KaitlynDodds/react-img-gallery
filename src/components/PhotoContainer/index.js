@@ -5,6 +5,13 @@ import PhotoItem from './PhotoItem';
 import NotFound from './NotFound';
 
 class PhotoContainer extends Component { 
+
+    componentDidMount = () => {
+        // if reloading search results, call search again
+        if (this.props.match.params.value) {
+            this.props.submitSearch(this.props.match.params.value);
+        }
+    }
     
     render() {
         let photoItemComponents;

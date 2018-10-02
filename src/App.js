@@ -90,19 +90,34 @@ class App extends Component {
 						/>
 						<Route 
 							path="/cats"
-							render={ (props) => <PhotoContainer {...props} topic="cats" photos={this.state.cats} />}
+							render={ (props) => <PhotoContainer 
+													{...props} 
+													topic="cats" 
+													photos={this.state.cats} 
+													submitSearch={this.submitSearch}/>}
 						/>
 						<Route 
 							path="/crayons"
-							render={ (props) => <PhotoContainer {...props} topic="crayons" photos={this.state.crayons} />}
+							render={ (props) => <PhotoContainer 
+													{...props} 
+													topic="crayons" 
+													photos={this.state.crayons} 
+													submitSearch={this.submitSearch}/>}
 						/>
 						<Route 
 							path="/starwars"
-							render={ (props) => <PhotoContainer {...props} topic="star wars" photos={this.state.starwars} />}
+							render={ (props) => <PhotoContainer 
+													{...props} 
+													topic="star wars" 
+													photos={this.state.starwars} 
+													submitSearch={this.submitSearch}/>}
 						/>
 						<Route 
 							path="/search/:value"
-							render={(props) => <PhotoContainer {...props} photos={this.state.photos} />}
+							render={(props) => <PhotoContainer 
+													{...props} 
+													photos={this.state.photos} 
+													submitSearch={this.submitSearch}/>}
 						/> 
 						<Route
 							render={ (props) => <PhotoContainer {...props} />}
