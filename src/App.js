@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import apiKey from './config';
 import axios from 'axios';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 // components
 import SearchForm from './components/SearchForm';
@@ -54,6 +54,7 @@ class App extends Component {
 			.then(response => response.data.photos.photo)
 			.then(photos => {
 				this.setState({ photos });
+				
 			});
 	}
 
@@ -86,19 +87,22 @@ class App extends Component {
 						<Route 
 							exact
 							path="/"
-							component={ PhotoContainer }
+							component={ () => <Redirect to="/cats" /> }
 						/>
 						<Route 
-							path={`/search/:value`}
-							render={ (props)=>  <PhotoContainer {...props} photos = { this.state.photos } search = { this.onSubmitSearch } />}
+							path="/cats"
+							render={ (props) => <PhotoContainer {...props} topic="cats" photos={this.state.cats} />}
 						/>
 						<Route 
-							path={`/starwars`}
-							render={ () => <PhotoContainer photos={this.state.starwars} />  }
+							path="/crayons"
+							render={ (props) => <PhotoContainer {...props} topic="crayons" photos={this.state.crayons} />}
 						/>
 						<Route 
-							path={`/crayons`}
-							render={ () => <PhotoContainer photos={this.state.crayons} />  }
+							path="/starwars"
+							render={ (props) => <PhotoContainer {...props} topic="star wars" photos={this.state.starwars} />}
+						/>
+						<Route
+							render={ (props) => <PhotoContainer {...props} />}
 						/>
 					</Switch>
 				</div>

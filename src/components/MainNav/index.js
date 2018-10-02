@@ -1,15 +1,20 @@
 import React from 'react';
 
-// components
-import Link from './Link';
+import { NavLink } from 'react-router-dom';
 
 const MainNav = props => {
     return (
         <nav className="main-nav">
             <ul>
-                <Link topic="cats" />
-                <Link topic="crayons" />
-                <Link topic="starwars" />
+                <li>
+                    <NavLink to={`/cats`}>Cats</NavLink>
+                </li>
+                <li>
+                    <NavLink to={`/crayons`}>Crayons</NavLink>
+                </li>
+                <li>
+                    <NavLink to={`/starwars`}>Star Wars</NavLink>
+                </li>
             </ul>
         </nav>
     );
