@@ -18,7 +18,11 @@ class App extends Component {
 			photos: [],
 			cats: [],
 			starwars: [],
-			crayons: []
+			crayons: [],
+			loading: true,
+			loadingCats: true,
+			loadingStarWars: true,
+			loadingCrayons: true
 		};
 
 	}
@@ -28,7 +32,8 @@ class App extends Component {
 			.then(response => response.data.photos.photo)
 			.then(photos => {
 				this.setState({
-					cats: photos
+					cats: photos,
+					loadingCats: false
 				});
 			});
 
@@ -36,7 +41,8 @@ class App extends Component {
 			.then(response => response.data.photos.photo)
 			.then(photos => {
 				this.setState({
-					starwars: photos
+					starwars: photos,
+					loadingStarWars: false
 				});
 			});
 
@@ -44,7 +50,8 @@ class App extends Component {
 			.then(response => response.data.photos.photo)
 			.then(photos => {
 				this.setState({
-					crayons: photos
+					crayons: photos,
+					loadingCrayons: false
 				});
 			});
 	}
@@ -71,7 +78,9 @@ class App extends Component {
 			.then(response => response.data.photos.photo)
 			.then(photos => {
 				this.setState({
-					photos: photos
+					photos: photos,
+					currentTopic: value,
+					loading: false
 				});
 			});
 	}
@@ -94,7 +103,8 @@ class App extends Component {
 													{...props} 
 													topic="cats" 
 													photos={this.state.cats} 
-													submitSearch={this.submitSearch}/>}
+													submitSearch={this.submitSearch}
+													loading={this.state.loadingCats}/>}
 						/>
 						<Route 
 							path="/crayons"
@@ -102,7 +112,8 @@ class App extends Component {
 													{...props} 
 													topic="crayons" 
 													photos={this.state.crayons} 
-													submitSearch={this.submitSearch}/>}
+													submitSearch={this.submitSearch}
+													loading={this.state.loadingCrayons}/>}
 						/>
 						<Route 
 							path="/starwars"
@@ -110,14 +121,17 @@ class App extends Component {
 													{...props} 
 													topic="star wars" 
 													photos={this.state.starwars} 
-													submitSearch={this.submitSearch}/>}
+													submitSearch={this.submitSearch}
+													loading={this.state.loadingStarWars}/>}
 						/>
 						<Route 
 							path="/search/:value"
 							render={(props) => <PhotoContainer 
-													{...props} 
+													{...props}
+													topic={this.state.currentTopic}
 													photos={this.state.photos} 
-													submitSearch={this.submitSearch}/>}
+													submitSearch={this.submitSearch}
+													loading={this.state.loading}/>}
 						/> 
 						<Route
 							render={ (props) => <PhotoContainer {...props} />}

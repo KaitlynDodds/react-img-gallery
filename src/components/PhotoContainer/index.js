@@ -27,14 +27,22 @@ class PhotoContainer extends Component {
             });
         }
 
-        return (
-            <div className="photo-container">
-                <h3>{this.props.topic || this.props.match.params.value}</h3>
-                <ul>
-                    {this.props.photos.length > 0 ? photoItemComponents : <NotFound />}
-                </ul>
-            </div>
-        );
+        if (this.props.loading) {
+            return (
+                <div className="photo-container">
+                    <h3>Loading...</h3>
+                </div>
+            );
+        } else {
+            return (
+                <div className="photo-container">
+                    <h3>{this.props.topic}</h3>
+                    <ul>
+                        {this.props.photos.length > 0 ? photoItemComponents : <NotFound />}
+                    </ul>
+                </div>
+            );
+        }
     }
 }
 
