@@ -102,7 +102,7 @@ class App extends Component {
 						/>
 						<Route 
 							path="/search/:value"
-							render={(props) => <PhotoContainer {...props} topic="works" photos={this.state.photos} />}
+							render={(props) => <PhotoContainer {...props} photos={this.state.photos} />}
 						/> 
 						<Route
 							render={ (props) => <PhotoContainer {...props} />}
