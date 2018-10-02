@@ -22,6 +22,7 @@ class PhotoContainer extends Component {
 
         return (
             <div className="photo-container">
+                <h3>{this.props.topic || this.props.match.params.value}</h3>
                 <ul>
                     {this.props.photos.length > 0 ? photoItemComponents : <NotFound />}
                 </ul>

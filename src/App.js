@@ -90,15 +90,15 @@ class App extends Component {
 						/>
 						<Route 
 							path="/cats"
-							render={ (props) => <PhotoContainer {...props} photos={this.state.cats} />}
+							render={ (props) => <PhotoContainer {...props} topic="cats" photos={this.state.cats} />}
 						/>
 						<Route 
 							path="/crayons"
-							render={ (props) => <PhotoContainer {...props} photos={this.state.crayons} />}
+							render={ (props) => <PhotoContainer {...props} topic="crayons" photos={this.state.crayons} />}
 						/>
 						<Route 
 							path="/starwars"
-							render={ (props) => <PhotoContainer {...props} photos={this.state.starwars} />}
+							render={ (props) => <PhotoContainer {...props} topic="star wars" photos={this.state.starwars} />}
 						/>
 						<Route 
 							path="/search/:value"

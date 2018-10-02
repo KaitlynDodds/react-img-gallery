@@ -93,6 +93,15 @@ input {
   width: 100%;
 }
 
+
+/* Custom Styles */
+
+.photo-container h3 {
+  text-transform: capitalize;
+}
+
+/* Custom Styles */
+
 @media only screen and (max-width: 767px)  {
   body {
     padding-top: 2em;
