@@ -9,8 +9,10 @@ class SearchForm extends Component {
         let search = this.search.value;
         this.search.value = "";
 
+        // callback to App to perform state change
         this.props.submitSearch(search)
             .then(() => {
+                // then push url change
                 let path = `/search/${search}`;
                 this.props.history.push(path);
             });

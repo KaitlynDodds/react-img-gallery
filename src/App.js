@@ -56,6 +56,7 @@ class App extends Component {
 			});
 	}
 
+	// reach out to flickr api, return promise
 	searchFlickr = (search) => {
 		return axios.get('https://api.flickr.com/services/rest', {
 			params: {
@@ -73,7 +74,11 @@ class App extends Component {
 		});
 	}
 
+	// should be called to update photos in state with search results
 	submitSearch = (value) => {
+		// new search beginning, reset loading state
+		this.setState({loading: true});
+
 		return this.searchFlickr(value)
 			.then(response => response.data.photos.photo)
 			.then(photos => {
