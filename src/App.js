@@ -49,15 +49,6 @@ class App extends Component {
 			});
 	}
 
-	onSubmitSearch = (val) => {
-		this.searchFlickr(val)
-			.then(response => response.data.photos.photo)
-			.then(photos => {
-				this.setState({ photos });
-				
-			});
-	}
-
 	searchFlickr = (search) => {
 		return axios.get('https://api.flickr.com/services/rest', {
 			params: {
@@ -75,13 +66,21 @@ class App extends Component {
 		});
 	}
 
+	submitSearch = (value) => {
+		return this.searchFlickr(value)
+			.then(response => response.data.photos.photo)
+			.then(photos => {
+				this.setState({
+					photos: photos
+				});
+			});
+	}
+
 	render() {
 		return (
 			<BrowserRouter>
 				<div className="container">
-					<SearchForm 
-						onSubmitSearch={this.onSubmitSearch}
-					/>
+					<SearchForm submitSearch={this.submitSearch} />
 					<MainNav />
 					<Switch>
 						<Route 
@@ -91,16 +90,20 @@ class App extends Component {
 						/>
 						<Route 
 							path="/cats"
-							render={ (props) => <PhotoContainer {...props} topic="cats" photos={this.state.cats} />}
+							render={ (props) => <PhotoContainer {...props} photos={this.state.cats} />}
 						/>
 						<Route 
 							path="/crayons"
-							render={ (props) => <PhotoContainer {...props} topic="crayons" photos={this.state.crayons} />}
+							render={ (props) => <PhotoContainer {...props} photos={this.state.crayons} />}
 						/>
 						<Route 
 							path="/starwars"
-							render={ (props) => <PhotoContainer {...props} topic="star wars" photos={this.state.starwars} />}
+							render={ (props) => <PhotoContainer {...props} photos={this.state.starwars} />}
 						/>
+						<Route 
+							path="/search/:value"
+							render={(props) => <PhotoContainer {...props} topic="works" photos={this.state.photos} />}
+						/> 
 						<Route
 							render={ (props) => <PhotoContainer {...props} />}
 						/>

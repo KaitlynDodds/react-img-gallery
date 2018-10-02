@@ -3,30 +3,24 @@ import { withRouter } from 'react-router-dom'
 
 class SearchForm extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            inputText: ""
-        }
-    }
-
-    onChangeInput = (e) => 
-        this.setState({ inputText: e.target.value });
-
     onSubmit = (e) => {
         e.preventDefault();
-    
-        this.props.onSubmitSearch(this.state.inputText);
-       
-        this.props.history.push(`/search/${this.state.inputText}`);
+
+        let search = this.search.value;
+        this.search.value = "";
+
+        this.props.submitSearch(search)
+            .then(() => {
+                let path = `/search/${search}`;
+                this.props.history.push(path);
+            });
     }
 
     render() {
         return (
-            <form className="search-form" onSubmit={(e) => this.onSubmit(e) } >
+            <form className="search-form" onSubmit={this.onSubmit} >
                 <input 
-                    onChange = { e => this.onChangeInput(e) }
+                    ref={ input => this.search = input }
                     type="search" 
                     name="search" 
                     placeholder="Search" 

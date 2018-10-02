@@ -22,6 +22,7 @@ class PhotoContainer extends Component {
 
         return (
             <div className="photo-container">
+                {this.props.topic ? <p>{this.props.topic}</p> : "" }
                 <ul>
                     {this.props.photos ? photoItemComponents : <NotFound />}
                 </ul>
