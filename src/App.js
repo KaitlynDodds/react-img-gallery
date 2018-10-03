@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import apiKey from './config';
 import axios from 'axios';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
@@ -8,6 +7,8 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import SearchForm from './components/SearchForm';
 import MainNav from './components/MainNav';
 import PhotoContainer from './components/PhotoContainer';
+
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 class App extends Component {
 
@@ -28,6 +29,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
+		
 		this.searchFlickr('cats')
 			.then(response => response.data.photos.photo)
 			.then(photos => {
@@ -58,9 +60,10 @@ class App extends Component {
 
 	// reach out to flickr api, return promise
 	searchFlickr = (search) => {
+		console.log(API_KEY);
 		return axios.get('https://api.flickr.com/services/rest', {
 			params: {
-				api_key: apiKey,
+				api_key: API_KEY,
 				method: "flickr.photos.search",
 				page: 1,
 				per_page: 24,
