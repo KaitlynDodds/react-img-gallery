@@ -39,7 +39,7 @@ class PhotoContainer extends Component {
                     <h3>{this.props.topic}</h3>
                     <ul>
                         {/* Check that results were returned, otherwise indicate not found */}
-                        {this.props.photos.length > 0 ? photoItemComponents : <NotFound />}
+                        {this.props.photos && this.props.photos.length > 0 ? photoItemComponents : <NotFound />}
                     </ul>
                 </div>
             );

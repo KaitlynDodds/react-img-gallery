@@ -8,7 +8,7 @@ import SearchForm from './components/SearchForm';
 import MainNav from './components/MainNav';
 import PhotoContainer from './components/PhotoContainer';
 
-const API_KEY = process.env.REACT_APP_API_KEY;
+import API_KEY from './config';
 
 class App extends Component {
 
